@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="data:," />
+    <title>Arrivo · filmstrip</title>
+    <style>
+      body { font: 13px/1.5 system-ui, sans-serif; margin: 16px; background: #f6f5f1; color: #1f1e1c; }
+      body.dark { background: #161615; color: #f1efe8; }
+      .row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+      .name { width: 92px; font-weight: 600; }
+      figure { margin: 0; }
+      figcaption { font-size: 11px; opacity: 0.6; }
+      canvas.snap { display: block; border-radius: 10px; border: 1px solid rgba(0, 0, 0, 0.08); }
+    </style>
+  </head>
+  <body>
+    <div id="out"></div>
+    <div id="stage-host" style="position: absolute; left: -10000px; top: 0"></div>
+    <script type="module" src="./src/frames.ts"></script>
+  </body>
+</html>

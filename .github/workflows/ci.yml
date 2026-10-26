@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Type-check the library, demo and unit tests
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm test
+      - name: Build the package (ESM, CJS and type declarations)
+        run: npm run build
+      - name: Build the demo site
+        run: npm run build:playground
+
+  e2e:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+      # Every effect on the demo page, in a hermetic mode: fixed data, no network photos.
+      - name: End-to-end tests
+        run: npm run test:e2e
+        env:
+          PW_CHANNEL: chromium

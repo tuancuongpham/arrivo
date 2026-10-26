@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="data:," />
+    <title>Arrivo · bench</title>
+    <style>
+      body { font: 13px/1.5 system-ui, sans-serif; margin: 16px; background: #f6f5f1; color: #1f1e1c; }
+      table { border-collapse: collapse; margin-top: 12px; }
+      td, th { padding: 4px 10px; border-bottom: 1px solid #ddd; text-align: right; font-variant-numeric: tabular-nums; }
+      th:first-child, td:first-child { text-align: left; }
+      .over { color: #a32d2d; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <h1 style="font-size: 18px">Arrivo bench</h1>
+    <p id="status">Đang chạy…</p>
+    <div id="out"></div>
+    <div id="stage-host" style="position: absolute; left: -10000px; top: 0"></div>
+    <script type="module" src="./src/bench.ts"></script>
+  </body>
+</html>

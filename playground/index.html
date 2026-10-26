@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Arrivo: thirteen canvas loading effects for React that reveal real content in place, with no layout shift." />
+    <meta name="color-scheme" content="light dark" />
+    <title>Arrivo: loading effects for React</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318181b'/%3E%3Crect x='7' y='9' width='18' height='4' rx='2' fill='%23f0754e'/%3E%3Crect x='7' y='15' width='13' height='4' rx='2' fill='%23fdfdfc'/%3E%3Crect x='7' y='21' width='8' height='4' rx='2' fill='%23fdfdfc' fill-opacity='.45'/%3E%3C/svg%3E" />
+    <script>
+      try {
+        var c = localStorage.getItem('arrivo-theme') || 'system';
+        var dark = c === 'dark' || (c === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      } catch (e) {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>

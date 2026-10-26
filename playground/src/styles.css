@@ -1,0 +1,148 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * One neutral family (zinc) with a single vermilion accent, swapped per theme.
+ * Radius system: controls are full pills, cards are 16px, media inside cards is 10px.
+ */
+:root {
+  color-scheme: light;
+  --bg: #f6f6f5;
+  --surface: #fdfdfc;
+  --surface-2: #efefed;
+  --ink: #18181b;
+  --ink-2: #4f4f57;
+  --muted: #6b6b74;
+  --line: rgb(24 24 27 / 0.08);
+  --line-2: rgb(24 24 27 / 0.16);
+  --accent: #cc4a24;
+  --accent-ink: #fdfdfc;
+  --accent-soft: color-mix(in oklab, var(--accent) 9%, var(--surface));
+  --night: #131315;
+  --night-2: #1d1d20;
+  --night-ink: #f1f1f2;
+  --night-muted: #a1a1aa;
+  --shadow: 0 1px 2px rgb(24 24 27 / 0.04), 0 10px 28px -14px rgb(24 24 27 / 0.16);
+  --arrivo-accent: var(--accent);
+  --arrivo-font-mono: 'Geist Mono Variable', ui-monospace, monospace;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0b0b0c;
+  --surface: #141416;
+  --surface-2: #1d1d20;
+  --ink: #f3f3f4;
+  --ink-2: #b4b4bb;
+  --muted: #8d8d96;
+  --line: rgb(243 243 244 / 0.08);
+  --line-2: rgb(243 243 244 / 0.16);
+  --accent: #f0754e;
+  --accent-ink: #160c08;
+  --accent-soft: color-mix(in oklab, var(--accent) 13%, var(--surface));
+  --night: #08080a;
+  --night-2: #151518;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.35), 0 14px 34px -18px rgb(0 0 0 / 0.7);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-night: var(--night);
+  --color-night-2: var(--night-2);
+  --color-night-ink: var(--night-ink);
+  --color-night-muted: var(--night-muted);
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --shadow-card: var(--shadow);
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 28%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* Card tones re-point the tokens, so cards and the effects inside them follow along. */
+  .tone-night {
+    color-scheme: dark;
+    --bg: var(--night);
+    --surface: var(--night);
+    --surface-2: var(--night-2);
+    --ink: var(--night-ink);
+    --ink-2: #c4c4cb;
+    --muted: var(--night-muted);
+    --line: rgb(255 255 255 / 0.08);
+    --line-2: rgb(255 255 255 / 0.18);
+  }
+
+  .tone-accent {
+    --surface: color-mix(in oklab, #cc4a24 9%, #fdfdfc);
+    --surface-2: color-mix(in oklab, #cc4a24 16%, #fdfdfc);
+  }
+
+  [data-theme='dark'] .tone-accent {
+    --surface: color-mix(in oklab, #f0754e 12%, #141416);
+    --surface-2: color-mix(in oklab, #f0754e 20%, #141416);
+  }
+
+  /* A faint printer's dot screen behind the hero asset, fading out at the edges. */
+  .dot-screen {
+    background-image: radial-gradient(circle, var(--line-2) 1px, transparent 1.6px);
+    background-size: 14px 14px;
+    mask-image: radial-gradient(60% 55% at 60% 45%, #000 20%, transparent 75%);
+  }
+
+  .code .k {
+    color: var(--accent);
+  }
+  .code .s {
+    color: var(--ink-2);
+  }
+  .code .t {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .code .c {
+    color: var(--muted);
+    font-style: italic;
+  }
+  .code .p {
+    color: var(--muted);
+  }
+}
