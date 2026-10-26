@@ -2,6 +2,8 @@
 
 Loading effects for React that reveal your real content in place, instead of a pulsing grey skeleton.
 
+**[Live demo](https://tuancuongpham.github.io/arrivo/)**: all thirteen effects on realistic cards, each one playing as you scroll to it.
+
 While `loading` is true, the content is hidden and an effect plays exactly where it will land. When `loading` turns false, the new content is revealed in its final position: no spinner, no layout jump. Thirteen effects ship today, from a split-flap departure board to a CRT finding its channel.
 
 *Arrivo* is Italian for "arrival", and what you call out when you are on your way.
@@ -223,13 +225,15 @@ npm test            # unit tests (Vitest)
 npm run test:e2e    # end-to-end tests (Playwright; uses the installed Edge, PW_CHANNEL=chrome to switch)
 npm run bench       # frame-time budget check
 npm run build       # dist/: ESM + CJS + .d.ts for arrivo, arrivo/core, arrivo/effects
-npm run build:playground   # static demo site in playground/dist (relative base, ready for GitHub Pages)
+npm run build:playground   # static demo site in playground/dist (relative base, so it works under any path)
 ```
 
 The playground has three pages:
 - `/`: the demo site. A hero that tours every effect, a gallery of all thirteen on realistic cards, the eight threshold maps, a sandbox and install notes. Photographs come from Unsplash through [Lorem Picsum](https://picsum.photos), which sends CORS headers so effects can read the pixels. Add `?e2e` for fixed data, local canvas art instead of photos and short latencies, which is what the end-to-end tests use.
 - `/frames.html`: a filmstrip of every effect at fixed moments, useful for visual review. Add `?dark` for a dark surface or `?only=crt` for a single effect.
 - `/bench.html`: the frame-time table.
+
+Every push to `main` publishes the demo to [GitHub Pages](https://tuancuongpham.github.io/arrivo/) through `.github/workflows/pages.yml`.
 
 ## License
 
