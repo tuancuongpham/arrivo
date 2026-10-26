@@ -1,5 +1,5 @@
 {
-  "name": "arrivo",
+  "name": "@brottin/arrivo",
   "version": "0.1.0",
   "description": "Loading effects for React that reveal real content in place: split-flap, redacted, quadtree mosaic, CMYK halftone, CRT tune-in, ink threshold maps, particle swarm and more.",
   "author": "Tuan Cuong Pham",

@@ -11,9 +11,9 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: [
-      { find: /^arrivo\/core$/, replacement: here('../src/core/index.ts') },
-      { find: /^arrivo\/effects$/, replacement: here('../src/effects/index.ts') },
-      { find: /^arrivo$/, replacement: here('../src/index.ts') },
+      { find: /^@brottin\/arrivo\/core$/, replacement: here('../src/core/index.ts') },
+      { find: /^@brottin\/arrivo\/effects$/, replacement: here('../src/effects/index.ts') },
+      { find: /^@brottin\/arrivo$/, replacement: here('../src/index.ts') },
     ],
   },
   build: {

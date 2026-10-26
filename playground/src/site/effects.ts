@@ -1,6 +1,6 @@
-import type { Effect } from 'arrivo';
-import type { ThresholdKind } from 'arrivo/core';
-import * as fx from 'arrivo/effects';
+import type { Effect } from '@brottin/arrivo';
+import type { ThresholdKind } from '@brottin/arrivo/core';
+import * as fx from '@brottin/arrivo/effects';
 
 export type EffectKey =
   | 'flap'

@@ -1,8 +1,8 @@
 import { motion, useInView, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
-import { Reveal } from 'arrivo';
-import type { ThresholdKind } from 'arrivo/core';
-import { ink } from 'arrivo/effects';
+import { Reveal } from '@brottin/arrivo';
+import type { ThresholdKind } from '@brottin/arrivo/core';
+import { ink } from '@brottin/arrivo/effects';
 import { useRevealMotion } from './controls';
 import { E2E } from './data';
 import { VARIANTS } from './effects';

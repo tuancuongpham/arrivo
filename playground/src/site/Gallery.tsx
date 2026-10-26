@@ -1,7 +1,7 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import { motion, useInView, useReducedMotion } from 'motion/react';
 import { useRef, useState, type ComponentType, type MouseEvent } from 'react';
-import { Reveal, type Origin } from 'arrivo';
+import { Reveal, type Origin } from '@brottin/arrivo';
 import * as C from './cards';
 import { useControls, useMockFetch, useRevealMotion } from './controls';
 import * as D from './data';

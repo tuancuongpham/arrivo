@@ -1,7 +1,7 @@
 import { ArrowDownIcon, CaretLeftIcon, CaretRightIcon, PauseIcon, PlayIcon } from '@phosphor-icons/react';
 import { motion, useInView, useReducedMotion } from 'motion/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Reveal } from 'arrivo';
+import { Reveal } from '@brottin/arrivo';
 import { useRevealMotion } from './controls';
 import { E2E, showcase } from './data';
 import { EFFECTS, TOUR } from './effects';
@@ -88,7 +88,7 @@ function Showcase() {
         <div className="min-w-0" aria-live="polite">
           <p className="text-[15px] font-medium text-ink">{info.title}</p>
           <code className="block truncate font-mono text-[12.5px] text-muted">
-            import {'{'} {key} {'}'} from &apos;arrivo/effects&apos;
+            import {'{'} {key} {'}'} from &apos;@brottin/arrivo/effects&apos;
           </code>
         </div>
         <div className="flex shrink-0 items-center gap-0.5 rounded-full border border-line bg-surface p-1">
@@ -144,7 +144,7 @@ export function Hero() {
           >
             Explore effects <ArrowDownIcon size={16} />
           </a>
-          <CopyChip text="npm i arrivo" />
+          <CopyChip text="npm i @brottin/arrivo" />
         </motion.div>
       </div>
       <motion.div {...(reduce ? {} : { initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] } })}>

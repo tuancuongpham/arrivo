@@ -1,7 +1,7 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import { useInView } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
-import { Reveal, Skeleton } from 'arrivo';
+import { Reveal, Skeleton } from '@brottin/arrivo';
 import { ArticleCard, KitCard, KpiCard } from './cards';
 import { useControls, useRevealMotion } from './controls';
 import * as D from './data';

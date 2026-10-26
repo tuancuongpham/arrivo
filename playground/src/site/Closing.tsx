@@ -35,13 +35,13 @@ const STEPS = [
   {
     title: 'Install',
     note: 'React 17 or newer. No runtime dependencies.',
-    code: 'npm i arrivo',
+    code: 'npm i @brottin/arrivo',
   },
   {
     title: 'Wrap your content',
     note: 'While loading is true the content hides and the effect plays where it will land.',
-    code: `import { Reveal } from 'arrivo';
-import { halftone } from 'arrivo/effects';
+    code: `import { Reveal } from '@brottin/arrivo';
+import { halftone } from '@brottin/arrivo/effects';
 
 <Reveal effect={halftone} loading={isLoading}>
   <ArticleCard post={post} />

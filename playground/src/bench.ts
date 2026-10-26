@@ -1,5 +1,5 @@
-import { createStage, ensureStyles, type Effect } from 'arrivo/core';
-import * as fx from 'arrivo/effects';
+import { createStage, ensureStyles, type Effect } from '@brottin/arrivo/core';
+import * as fx from '@brottin/arrivo/effects';
 
 /**
  * Drives each effect with a fake clock at three sizes and times every frame on the CPU.

@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import type { Origin } from 'arrivo';
+import type { Origin } from '@brottin/arrivo';
 import { E2E } from './data';
 import { preload, type PhotoSpec } from './photo';
 

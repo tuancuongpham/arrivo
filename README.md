@@ -19,14 +19,14 @@ While `loading` is true, the content is hidden and an effect plays exactly where
 ## Install
 
 ```sh
-npm i arrivo
+npm i @brottin/arrivo
 ```
 
 ## Quick start
 
 ```tsx
-import { Reveal, Skeleton } from 'arrivo';
-import { ink, flap } from 'arrivo/effects';
+import { Reveal, Skeleton } from '@brottin/arrivo';
+import { ink, flap } from '@brottin/arrivo/effects';
 
 // Re-fetching: the effect plays over the previous layout, then reveals the new data.
 <Reveal effect={ink} options={{ variant: 'radar' }} loading={isLoading}>
@@ -39,7 +39,7 @@ import { ink, flap } from 'arrivo/effects';
 </Reveal>
 ```
 
-Effects are plain objects imported from `arrivo/effects`, so bundlers only include the ones you use.
+Effects are plain objects imported from `@brottin/arrivo/effects`, so bundlers only include the ones you use.
 
 ## Effects
 
@@ -94,7 +94,7 @@ Effects are plain objects imported from `arrivo/effects`, so bundlers only inclu
 
 | Prop | Default | |
 |---|---|---|
-| `effect` | — | Effect object from `arrivo/effects` |
+| `effect` | — | Effect object from `@brottin/arrivo/effects` |
 | `options` | — | Effect-specific options |
 | `loading` | `false` | Hide the content and play the loading state; flipping to `false` reveals |
 | `skeleton` | — | Rendered instead of `children` while `loading` |
@@ -152,8 +152,8 @@ Colours are re-read on every run, so light/dark switches just work. Any CSS colo
 ## Without React
 
 ```ts
-import { createReveal } from 'arrivo/core';
-import { thermal } from 'arrivo/effects';
+import { createReveal } from '@brottin/arrivo/core';
+import { thermal } from '@brottin/arrivo/effects';
 
 const reveal = createReveal(document.querySelector('#stats')!, { effect: thermal, loading: true });
 const data = await fetchStats();
@@ -166,7 +166,7 @@ reveal.setLoading(false);
 Styles are injected on first use. To avoid a flash before hydration, include them in your HTML:
 
 ```ts
-import { ARRIVO_CSS } from 'arrivo';
+import { ARRIVO_CSS } from '@brottin/arrivo';
 // <style>{ARRIVO_CSS}</style>
 ```
 
@@ -177,7 +177,7 @@ The React entry is marked `'use client'` for the Next.js App Router. Server-rend
 An effect is two functions. `idle()` draws the loading state, and `reveal()` draws progress `p` from 0 to 1. Both receive a `Stage`: the canvas context (already scaled for the device pixel ratio), the measured targets, their union `box`, a `clip` path, theme colours, seeded `random`/`noise`/`fbm`, and `words()`, `chars()`, `raster()` and `pixels()` to read the content.
 
 ```ts
-import { defineEffect, rgba } from 'arrivo/core';
+import { defineEffect, rgba } from '@brottin/arrivo/core';
 
 export const wipe = defineEffect<{ angle: number }>({
   name: 'wipe',
@@ -224,7 +224,7 @@ npm run typecheck
 npm test            # unit tests (Vitest)
 npm run test:e2e    # end-to-end tests (Playwright; uses the installed Edge, PW_CHANNEL=chrome to switch)
 npm run bench       # frame-time budget check
-npm run build       # dist/: ESM and CJS with .d.ts and .d.cts types for arrivo, arrivo/core, arrivo/effects
+npm run build       # dist/: ESM and CJS with .d.ts and .d.cts types for @brottin/arrivo, @brottin/arrivo/core and @brottin/arrivo/effects
 npm run build:playground   # static demo site in playground/dist (relative base, so it works under any path)
 ```
 

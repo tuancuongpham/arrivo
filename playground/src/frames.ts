@@ -1,5 +1,5 @@
-import { createStage, ensureStyles, type Effect, type Stage } from 'arrivo/core';
-import * as fx from 'arrivo/effects';
+import { createStage, ensureStyles, type Effect, type Stage } from '@brottin/arrivo/core';
+import * as fx from '@brottin/arrivo/effects';
 
 /**
  * Filmstrip of every effect at fixed moments (loading, then reveal progress), drawn with a
