@@ -1,6 +1,6 @@
 import { clamp, easeOut, roundRectPath } from '../core/geom';
 import { rgba } from '../core/theme';
-import { defineEffect, type Rect, type Stage } from '../core/types';
+import { defineEffect, type Effect, type Rect, type Stage } from '../core/types';
 
 export interface HalftoneOptions {
   /** Screen spacing for images, in CSS pixels; grows on large areas to keep dot counts sane. */
@@ -87,7 +87,7 @@ function spacings(rects: readonly Rect[], text: readonly Rect[], o: HalftoneOpti
 const breathe = (d: Dot, t: number): number => 0.55 + 0.45 * Math.sin(t / 380 - (d.x + d.y) * 0.035);
 
 /** Newspaper print: four rotated CMYK screens grow in from the origin, then hand over to the real image. */
-export const halftone = defineEffect<HalftoneOptions>({
+export const halftone: Effect<HalftoneOptions> = defineEffect({
   name: 'halftone',
   show: 'end',
   duration: 1500,

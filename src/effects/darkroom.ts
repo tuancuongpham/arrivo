@@ -1,7 +1,7 @@
 import { easeInOut } from '../core/geom';
 import { cssColorToRGBA, mix, rgba } from '../core/theme';
 import { buildThreshold, ThresholdPainter } from '../core/threshold';
-import { defineEffect, type Stage } from '../core/types';
+import { defineEffect, type Effect, type Stage } from '../core/types';
 import { makeGrain } from './util';
 
 export interface DarkroomOptions {
@@ -19,7 +19,7 @@ function emulsion(stage: Stage, o: DarkroomOptions): string {
 }
 
 /** Instant film developing: a milky emulsion clears from the middle while contrast and colour come up. */
-export const darkroom = defineEffect<DarkroomOptions>({
+export const darkroom: Effect<DarkroomOptions> = defineEffect({
   name: 'darkroom',
   show: 'start',
   duration: 1900,

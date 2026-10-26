@@ -1,7 +1,7 @@
 import { ctx2d, makeCanvas } from '../core/canvas';
 import { clamp, roundRectPath } from '../core/geom';
 import { rgba } from '../core/theme';
-import { defineEffect, type Glyph, type Stage, type Target } from '../core/types';
+import { defineEffect, type Effect, type Glyph, type Stage, type Target } from '../core/types';
 
 export interface FlapOptions {
   /** Ordered faces each flap cycles through. Characters outside it land after a few random flips. */
@@ -267,7 +267,7 @@ function drawCells(stage: Stage, glyphs: Glyphs, cells: Cell[], image: HTMLCanva
   ctx.fill();
 }
 
-export const flap = defineEffect<FlapOptions>({
+export const flap: Effect<FlapOptions> = defineEffect({
   name: 'flap',
   show: 'end',
   duration: 1000,

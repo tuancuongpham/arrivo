@@ -1,6 +1,6 @@
 import { pixelBuffer } from '../core/canvas';
 import { clamp, easeInOut, pack } from '../core/geom';
-import { defineEffect, type Stage } from '../core/types';
+import { defineEffect, type Effect, type Stage } from '../core/types';
 
 export interface SwarmOptions {
   maxParticles: number;
@@ -57,7 +57,7 @@ function inkPoints(stage: Stage, max: number): [number, number, number, number, 
 }
 
 /** Dust drifts on a flow field while loading, then every mote flies to a point of ink in the real content. */
-export const swarm = defineEffect<SwarmOptions, Particle[]>({
+export const swarm: Effect<SwarmOptions, Particle[]> = defineEffect({
   name: 'swarm',
   show: 'end',
   duration: 1600,

@@ -1,6 +1,6 @@
 import { clamp, easeInOut } from '../core/geom';
 import { rgba } from '../core/theme';
-import { defineEffect, type Stage, type Target } from '../core/types';
+import { defineEffect, type Effect, type Stage, type Target } from '../core/types';
 
 export interface EqualizerOptions {
   /** Bar width in CSS pixels. */
@@ -77,7 +77,7 @@ function drawBars(stage: Stage, cols: Column[], level: (c: Column, i: number) =>
 }
 
 /** Columns bounce like an audio visualiser, then settle to the shape of the real text and hand over. */
-export const equalizer = defineEffect<EqualizerOptions>({
+export const equalizer: Effect<EqualizerOptions> = defineEffect({
   name: 'equalizer',
   show: 'end',
   duration: 1300,

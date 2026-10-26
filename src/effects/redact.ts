@@ -1,6 +1,6 @@
 import { clamp, easeOut, fillRoundRect, roundRectPath } from '../core/geom';
 import { rgba } from '../core/theme';
-import { defineEffect, type Rect, type Stage } from '../core/types';
+import { defineEffect, type Effect, type Rect, type Stage } from '../core/types';
 
 export interface RedactOptions {
   /** Rubber stamp shown while loading, or `false`. */
@@ -49,7 +49,7 @@ function drawStamp(stage: Stage, text: string, t: number, alpha: number): void {
   ctx.restore();
 }
 
-export const redact = defineEffect<RedactOptions>({
+export const redact: Effect<RedactOptions> = defineEffect({
   name: 'redact',
   show: 'start',
   duration: 1250,

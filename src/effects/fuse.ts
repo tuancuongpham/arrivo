@@ -1,7 +1,7 @@
 import { clamp, easeOut, fillRoundRect } from '../core/geom';
 import { rgba } from '../core/theme';
 import { buildThreshold, ThresholdPainter } from '../core/threshold';
-import { defineEffect, type Stage } from '../core/types';
+import { defineEffect, type Effect, type Stage } from '../core/types';
 import { drawGhosts, readingOrder } from './util';
 
 export interface FuseOptions {
@@ -154,7 +154,7 @@ function emit(stage: Stage, sparks: Spark[], at: { x: number; y: number }, colou
 }
 
 /** A fuse burns along the skeleton like a progress bar; when the data lands, a firework lights the content up. */
-export const fuse = defineEffect<FuseOptions, FuseState>({
+export const fuse: Effect<FuseOptions, FuseState> = defineEffect({
   name: 'fuse',
   show: 'start',
   duration: 1800,

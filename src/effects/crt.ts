@@ -1,7 +1,7 @@
 import { ctx2d, makeCanvas } from '../core/canvas';
 import { clamp, easeOut } from '../core/geom';
 import { rgba } from '../core/theme';
-import { defineEffect, type Stage } from '../core/types';
+import { defineEffect, type Effect, type Stage } from '../core/types';
 import { makeGrain } from './util';
 
 export interface CrtOptions {
@@ -37,7 +37,7 @@ function channels(src: HTMLCanvasElement): HTMLCanvasElement[] {
 }
 
 /** An old TV finding the channel: static, tearing, a rolling picture, colour fringes converging, a flash. */
-export const crt = defineEffect<CrtOptions>({
+export const crt: Effect<CrtOptions> = defineEffect({
   name: 'crt',
   show: 'end',
   duration: 1500,

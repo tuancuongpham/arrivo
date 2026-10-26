@@ -224,7 +224,7 @@ npm run typecheck
 npm test            # unit tests (Vitest)
 npm run test:e2e    # end-to-end tests (Playwright; uses the installed Edge, PW_CHANNEL=chrome to switch)
 npm run bench       # frame-time budget check
-npm run build       # dist/: ESM + CJS + .d.ts for arrivo, arrivo/core, arrivo/effects
+npm run build       # dist/: ESM and CJS with .d.ts and .d.cts types for arrivo, arrivo/core, arrivo/effects
 npm run build:playground   # static demo site in playground/dist (relative base, so it works under any path)
 ```
 

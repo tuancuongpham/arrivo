@@ -2,7 +2,7 @@ import { pixelBuffer } from '../core/canvas';
 import { clamp, pack, smoothstep } from '../core/geom';
 import { cssColorToRGBA } from '../core/theme';
 import { buildThreshold } from '../core/threshold';
-import { defineEffect, type Stage } from '../core/types';
+import { defineEffect, type Effect, type Stage } from '../core/types';
 
 export interface ThermalOptions {
   palette: 'iron' | 'rainbow';
@@ -55,7 +55,7 @@ function heatField(stage: Stage, cell: number) {
 }
 
 /** A thermal camera: blobs of heat while loading; the real picture cools into place from the origin. */
-export const thermal = defineEffect<ThermalOptions>({
+export const thermal: Effect<ThermalOptions> = defineEffect({
   name: 'thermal',
   show: 'end',
   duration: 1600,

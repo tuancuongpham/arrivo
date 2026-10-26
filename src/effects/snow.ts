@@ -1,7 +1,7 @@
 import { clamp } from '../core/geom';
 import { rgba } from '../core/theme';
 import { buildThreshold, ThresholdPainter } from '../core/threshold';
-import { defineEffect, type Stage, type Target } from '../core/types';
+import { defineEffect, type Effect, type Stage, type Target } from '../core/types';
 import { makeGrain } from './util';
 
 export interface SnowOptions {
@@ -84,7 +84,7 @@ function drawCaps(stage: Stage, caps: Cap[], c: ReturnType<typeof colours>, scal
 }
 
 /** Snow falls and settles on the content while it loads; when it lands, the frost melts away from the origin. */
-export const snow = defineEffect<SnowOptions, SnowState>({
+export const snow: Effect<SnowOptions, SnowState> = defineEffect({
   name: 'snow',
   show: 'start',
   duration: 1700,

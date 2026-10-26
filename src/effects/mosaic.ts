@@ -2,7 +2,7 @@ import { pixelBuffer } from '../core/canvas';
 import { MaxHeap } from '../core/geom';
 import { buildSAT, quadNode, splitQuad, type QuadNode } from '../core/quadtree';
 import { rgba } from '../core/theme';
-import { defineEffect, type Rect, type Stage } from '../core/types';
+import { defineEffect, type Effect, type Rect, type Stage } from '../core/types';
 
 export interface MosaicOptions {
   /** Starting block size in CSS pixels. */
@@ -29,7 +29,7 @@ function tiles(stage: Stage, size: number): Rect[] {
  * Progressive-JPEG nostalgia with a twist: blocks split by how much detail they hide, so
  * edges and faces sharpen first while flat sky stays chunky a little longer.
  */
-export const mosaic = defineEffect<MosaicOptions>({
+export const mosaic: Effect<MosaicOptions> = defineEffect({
   name: 'mosaic',
   show: 'end',
   duration: 1400,

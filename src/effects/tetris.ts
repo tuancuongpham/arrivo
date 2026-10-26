@@ -1,6 +1,6 @@
 import { clamp, fillRoundRect } from '../core/geom';
 import { rgba } from '../core/theme';
-import { defineEffect, type Stage } from '../core/types';
+import { defineEffect, type Effect, type Stage } from '../core/types';
 import { drawGhosts } from './util';
 
 export interface TetrisOptions {
@@ -137,7 +137,7 @@ function drawBlock(stage: Stage, b: Board, x: number, y: number, colour: string,
 }
 
 /** A tiny game of Tetris plays itself in the card; the reveal fills the well and clears it line by line. */
-export const tetris = defineEffect<TetrisOptions, Board>({
+export const tetris: Effect<TetrisOptions, Board> = defineEffect({
   name: 'tetris',
   show: 'start',
   duration: 1700,

@@ -2,7 +2,7 @@ import { pixelBuffer } from '../core/canvas';
 import { clamp, pack } from '../core/geom';
 import { rgba } from '../core/theme';
 import { buildThreshold, ThresholdPainter, type ThresholdKind } from '../core/threshold';
-import { defineEffect, type Stage } from '../core/types';
+import { defineEffect, type Effect, type Stage } from '../core/types';
 
 export interface InkOptions {
   /**
@@ -39,7 +39,7 @@ export function makeWash(stage: Stage, alpha = 150) {
 }
 
 /** Threshold-map reveals. One engine, eight looks; `ink` is the wet-edged default. */
-export const ink = defineEffect<InkOptions>({
+export const ink: Effect<InkOptions> = defineEffect({
   name: 'ink',
   show: 'start',
   duration: 1500,
