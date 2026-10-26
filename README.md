@@ -4,6 +4,8 @@ Loading effects for React that reveal your real content in place, instead of a p
 
 **[Live demo](https://tuancuongpham.github.io/arrivo/)**: all thirteen effects on realistic cards, each one playing as you scroll to it.
 
+Published on npm as [`@brottin/arrivo`](https://www.npmjs.com/package/@brottin/arrivo).
+
 While `loading` is true, the content is hidden and an effect plays exactly where it will land. When `loading` turns false, the new content is revealed in its final position: no spinner, no layout jump. Thirteen effects ship today, from a split-flap departure board to a CRT finding its channel.
 
 *Arrivo* is Italian for "arrival", and what you call out when you are on your way.
