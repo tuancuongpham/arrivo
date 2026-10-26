@@ -26,8 +26,13 @@ export interface RevealOptions<O = object> {
   lazy?: boolean;
   /** Animate only matching descendants. */
   selector?: string;
-  /** Override the effect's minimum loading time, in milliseconds. */
+  /** Minimum loading time, in milliseconds, before an effect plays. Default `0`. */
   minIdle?: number;
+  /**
+   * Loads that finish in less than this many milliseconds skip the effect and fade in, so a
+   * fast response is never held back by an animation. `0` always plays the effect. Default `500`.
+   */
+  fadeUnder?: number;
   /** `'auto'` follows `prefers-reduced-motion`. Default `'auto'`. */
   reducedMotion?: boolean | 'auto';
   seed?: number;
@@ -54,6 +59,7 @@ export interface RevealEventDetail {
 
 const SETTLE_MS = 220;
 const FADE_MS = 150;
+const FADE_UNDER_MS = 500;
 const REPLAY_IDLE_MS = 450;
 /** A pending reveal that sees no animation frames for this long just shows the content. */
 const STALL_MS = 2000;
@@ -124,6 +130,8 @@ class Controller implements RevealController {
   private dur = 1;
   private minIdle = 0;
   private wantReveal = false;
+  /** The load that ended was quick enough to fade in instead of playing the effect. */
+  private fast = false;
   private visible = true;
   private originOverride: Origin | undefined;
   private size = '';
@@ -163,6 +171,8 @@ class Controller implements RevealController {
     if (this.o.loading) this.setLoading(true);
     else if (this.o.revealOnMount) {
       this.enterLoading();
+      // Content that is already there counts as a load of 0 ms.
+      this.fast = this.fadeUnder() > 0;
       this.wantReveal = true;
       this.armStall();
     }
@@ -170,6 +180,10 @@ class Controller implements RevealController {
 
   private get speed(): number {
     return Math.max(0.05, this.o.speed ?? 1);
+  }
+
+  private fadeUnder(): number {
+    return Math.max(0, this.o.fadeUnder ?? FADE_UNDER_MS);
   }
 
   private reduced(): boolean {
@@ -249,10 +263,16 @@ class Controller implements RevealController {
     if (this.destroyed) return;
     if (loading) {
       this.wantReveal = false;
-      if (this.state !== 'loading') this.enterLoading();
+      if (this.state !== 'loading') {
+        this.fast = false;
+        this.enterLoading();
+      }
       return;
     }
     if (this.state === 'loading') {
+      // Judged when the data arrives rather than when the reveal starts, so a quick load
+      // that is still off screen fades in once it is scrolled to.
+      this.fast = now() - this.loadAt < this.fadeUnder();
       this.wantReveal = true;
       this.armStall();
       this.tryReveal();
@@ -279,6 +299,8 @@ class Controller implements RevealController {
     this.originOverride = opts.origin;
     this.enterLoading();
     this.minIdle = Math.max(this.minIdle, (opts.idle ?? REPLAY_IDLE_MS) / this.speed);
+    // A replay is asked for explicitly, so it always plays the effect.
+    this.fast = false;
     this.wantReveal = true;
     this.armStall();
   }
@@ -286,6 +308,7 @@ class Controller implements RevealController {
   hide(): void {
     if (this.destroyed) return;
     this.wantReveal = false;
+    this.fast = false;
     this.enterLoading();
   }
 
@@ -311,12 +334,14 @@ class Controller implements RevealController {
       if (!this.o.lazy) this.finish();
       return;
     }
-    if (!this.reduced() && now() - this.loadAt < this.minIdle) return;
+    if (!this.reduced() && !this.fast && now() - this.loadAt < this.minIdle) return;
     this.startReveal();
   }
 
   private startReveal(): void {
     this.wantReveal = false;
+    const fast = this.fast;
+    this.fast = false;
     let handoff: unknown;
     try {
       handoff = this.idleRun?.handoff?.();
@@ -326,7 +351,7 @@ class Controller implements RevealController {
     this.disposeRuns();
     const stage = (this.stage = this.measure());
     this.originOverride = undefined;
-    if (this.reduced() || scheduler.degraded) {
+    if (fast || this.reduced() || scheduler.degraded) {
       this.beginFade(stage);
       return;
     }
@@ -350,7 +375,7 @@ class Controller implements RevealController {
     this.setState('revealing');
   }
 
-  /** Reduced motion, a degraded page or a failing effect: cover the targets and fade it away. */
+  /** A fast load, reduced motion, a degraded page or a failing effect: cover the targets and fade it away. */
   private beginFade(stage: Stage): void {
     stage.clear();
     stage.ctx.fillStyle = rgba(stage.theme.surface);

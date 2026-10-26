@@ -140,8 +140,7 @@ function drawBlock(stage: Stage, b: Board, x: number, y: number, colour: string,
 export const tetris: Effect<TetrisOptions, Board> = defineEffect({
   name: 'tetris',
   show: 'start',
-  duration: 1700,
-  minIdle: 1000,
+  duration: 950,
   css: '.arrivo[data-arrivo-effect="tetris"] .arrivo-sk-line,.arrivo[data-arrivo-effect="tetris"] .arrivo-sk-block{background:repeating-linear-gradient(90deg,color-mix(in srgb,currentColor 14%,transparent) 0 .9em,transparent .9em 1em)}',
 
   idle(stage, options) {

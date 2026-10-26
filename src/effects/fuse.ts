@@ -157,8 +157,7 @@ function emit(stage: Stage, sparks: Spark[], at: { x: number; y: number }, colou
 export const fuse: Effect<FuseOptions, FuseState> = defineEffect({
   name: 'fuse',
   show: 'start',
-  duration: 1800,
-  minIdle: 700,
+  duration: 1000,
   css: '.arrivo[data-arrivo-effect="fuse"] .arrivo-sk-line{background:linear-gradient(transparent calc(100% - 2px),color-mix(in srgb,currentColor 35%,transparent) 0)}',
 
   idle(stage, options) {

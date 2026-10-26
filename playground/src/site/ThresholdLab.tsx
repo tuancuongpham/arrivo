@@ -22,7 +22,7 @@ export function ThresholdLab() {
   useEffect(() => {
     if (!loading || !inView) return;
     let live = true;
-    const t = setTimeout(() => void preload(PHOTOS.fjord).then(() => live && setLoading(false)), E2E ? 200 : 700);
+    const t = setTimeout(() => void preload(PHOTOS.fjord).then(() => live && setLoading(false)), E2E ? 600 : 700);
     return () => {
       live = false;
       clearTimeout(t);

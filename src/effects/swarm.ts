@@ -60,7 +60,7 @@ function inkPoints(stage: Stage, max: number): [number, number, number, number, 
 export const swarm: Effect<SwarmOptions, Particle[]> = defineEffect({
   name: 'swarm',
   show: 'end',
-  duration: 1600,
+  duration: 900,
   css: '.arrivo[data-arrivo-effect="swarm"] .arrivo-sk-line,.arrivo[data-arrivo-effect="swarm"] .arrivo-sk-block{background:radial-gradient(circle,color-mix(in srgb,currentColor 30%,transparent) 30%,transparent 34%) 0 0/6px 5px}',
 
   idle(stage, options) {

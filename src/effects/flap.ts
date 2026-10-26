@@ -17,7 +17,7 @@ export interface FlapOptions {
 const DEFAULTS: FlapOptions = {
   charset: ' 0123456789.,:+-%ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   flips: 9,
-  flipMs: 55,
+  flipMs: 40,
   sound: false,
 };
 
@@ -270,7 +270,7 @@ function drawCells(stage: Stage, glyphs: Glyphs, cells: Cell[], image: HTMLCanva
 export const flap: Effect<FlapOptions> = defineEffect({
   name: 'flap',
   show: 'end',
-  duration: 1000,
+  duration: 750,
   css: '.arrivo[data-arrivo-effect="flap"] .arrivo-sk-line{background:repeating-linear-gradient(90deg,color-mix(in srgb,currentColor 13%,transparent) 0 .55em,transparent .55em .64em)}',
 
   idle(stage, options) {
@@ -329,10 +329,10 @@ export const flap: Effect<FlapOptions> = defineEffect({
     let end = 0;
     for (const c of cells) {
       const line = lineTops.indexOf(Math.round(c.y / 4));
-      c.delay = ((c.x - box.x) / Math.max(1, box.w)) * 300 + line * 80 + stage.random() * 40 + (c.media ? 260 : 0);
+      c.delay = ((c.x - box.x) / Math.max(1, box.w)) * 180 + line * 48 + stage.random() * 30 + (c.media ? 150 : 0);
       end = Math.max(end, c.delay + c.seq.length * o.flipMs);
     }
-    const duration = end + 120;
+    const duration = end + 80;
     const image = cells.some((c) => c.media) ? stage.raster(true) : null;
     const glyphs = new Glyphs(stage.dpr);
     return {

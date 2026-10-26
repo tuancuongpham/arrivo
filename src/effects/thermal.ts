@@ -58,7 +58,7 @@ function heatField(stage: Stage, cell: number) {
 export const thermal: Effect<ThermalOptions> = defineEffect({
   name: 'thermal',
   show: 'end',
-  duration: 1600,
+  duration: 900,
   css: '.arrivo[data-arrivo-effect="thermal"] .arrivo-sk-line,.arrivo[data-arrivo-effect="thermal"] .arrivo-sk-block{background:linear-gradient(90deg,#2a0b5c,#d6303a,#fbd24c);opacity:.35}',
 
   idle(stage, options) {

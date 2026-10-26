@@ -90,7 +90,7 @@ const breathe = (d: Dot, t: number): number => 0.55 + 0.45 * Math.sin(t / 380 - 
 export const halftone: Effect<HalftoneOptions> = defineEffect({
   name: 'halftone',
   show: 'end',
-  duration: 1500,
+  duration: 850,
   css: '.arrivo[data-arrivo-effect="halftone"] .arrivo-sk-line,.arrivo[data-arrivo-effect="halftone"] .arrivo-sk-block{background:radial-gradient(circle,color-mix(in srgb,currentColor 22%,transparent) 32%,transparent 36%) 0 0/5px 5px}',
 
   idle(stage, options) {

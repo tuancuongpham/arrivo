@@ -22,7 +22,7 @@ function emulsion(stage: Stage, o: DarkroomOptions): string {
 export const darkroom: Effect<DarkroomOptions> = defineEffect({
   name: 'darkroom',
   show: 'start',
-  duration: 1900,
+  duration: 1000,
   css: '.arrivo[data-arrivo-effect="darkroom"] .arrivo-sk-line,.arrivo[data-arrivo-effect="darkroom"] .arrivo-sk-block{background:color-mix(in srgb,#A9B8C9 38%,transparent)}',
 
   idle(stage, options) {

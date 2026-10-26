@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.0
+
+Faster by default, after feedback that the effects held content back.
+
+- **Fast loads skip the effect.** A load that finishes in under 500 ms fades in over 150 ms instead of playing the
+  effect, so a quick response is never held back by an animation. The new `fadeUnder` option sets the threshold,
+  and `0` always plays the effect. Content that is already there when a `<Reveal>` mounts fades in the same way, and
+  `replay()` still plays the full effect.
+- **Shorter reveals.** Every effect's default reveal is about 45% shorter: 0.7 to 1 s instead of 1 to 1.9 s.
+  Split-flap flips faster too. `duration="cinematic"` keeps a longer feel.
+- **No minimum loading time.** Tetris, fuse and snow no longer hold content back for 0.7 to 1 s. `minIdle` is `0`
+  unless you set it.
+
 ## 0.1.0
 
 First release.

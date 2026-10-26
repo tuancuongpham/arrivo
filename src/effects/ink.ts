@@ -42,7 +42,7 @@ export function makeWash(stage: Stage, alpha = 150) {
 export const ink: Effect<InkOptions> = defineEffect({
   name: 'ink',
   show: 'start',
-  duration: 1500,
+  duration: 800,
   css: '.arrivo[data-arrivo-effect="ink"] .arrivo-sk-line,.arrivo[data-arrivo-effect="ink"] .arrivo-sk-block{background:radial-gradient(120% 140% at 30% 40%,color-mix(in srgb,currentColor 14%,transparent),color-mix(in srgb,currentColor 6%,transparent))}',
 
   idle(stage) {

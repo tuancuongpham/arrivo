@@ -40,7 +40,7 @@ function channels(src: HTMLCanvasElement): HTMLCanvasElement[] {
 export const crt: Effect<CrtOptions> = defineEffect({
   name: 'crt',
   show: 'end',
-  duration: 1500,
+  duration: 850,
   css: '.arrivo[data-arrivo-effect="crt"] .arrivo-sk-line,.arrivo[data-arrivo-effect="crt"] .arrivo-sk-block{background:repeating-linear-gradient(0deg,color-mix(in srgb,currentColor 16%,transparent) 0 1px,color-mix(in srgb,currentColor 8%,transparent) 1px 3px)}',
 
   idle(stage, options) {

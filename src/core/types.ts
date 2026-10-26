@@ -115,7 +115,10 @@ export interface Effect<O = object, H = unknown> {
   readonly show: 'start' | 'end';
   /** Default reveal duration in milliseconds. */
   readonly duration: number;
-  /** Minimum loading time before a reveal, for effects whose loading state builds the cover. */
+  /**
+   * Minimum loading time before this effect's reveal. The built-in effects leave it unset so
+   * content is never held back; the `minIdle` option overrides it.
+   */
   readonly minIdle?: number;
   /** Static CSS for `<Skeleton>` before JavaScript runs or with reduced motion. */
   readonly css?: string;

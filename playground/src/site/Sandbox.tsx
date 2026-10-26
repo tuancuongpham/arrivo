@@ -35,7 +35,7 @@ export function Sandbox() {
           setLoading(false);
           setFirst(false);
         }),
-      D.E2E ? 200 : 1300,
+      D.E2E ? 600 : 1300,
     );
     return () => {
       live = false;

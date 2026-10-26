@@ -52,7 +52,7 @@ function drawStamp(stage: Stage, text: string, t: number, alpha: number): void {
 export const redact: Effect<RedactOptions> = defineEffect({
   name: 'redact',
   show: 'start',
-  duration: 1250,
+  duration: 700,
   css: '.arrivo[data-arrivo-effect="redact"] .arrivo-sk-line{background:color-mix(in srgb,currentColor 78%,transparent);border-radius:2px}',
 
   idle(stage, options) {

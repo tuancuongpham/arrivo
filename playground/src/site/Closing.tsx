@@ -7,7 +7,7 @@ import { Logo, REPO_URL } from './Nav';
 const STATS = [
   { value: '0 px', label: 'Layout shift', note: 'Content keeps its box while hidden, so nothing moves when it lands.' },
   { value: '< 3 ms', label: 'Per frame', note: 'Every effect at 640 × 360 in headless Edge, measured by the bundled bench.' },
-  { value: '8.5 KB', label: 'Core, gzipped', note: 'Each effect adds 0.7 to 3.4 KB and tree-shakes away when unused.' },
+  { value: '8.6 KB', label: 'Core, gzipped', note: 'Each effect adds 0.7 to 3.4 KB and tree-shakes away when unused.' },
   { value: '150 ms', label: 'Reduced motion', note: 'With reduced motion on, every reveal becomes a short fade.' },
 ];
 

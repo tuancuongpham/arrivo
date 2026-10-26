@@ -21,7 +21,10 @@ export interface RevealProps<O = object> extends Omit<React.HTMLAttributes<HTMLE
   lazy?: boolean;
   /** Animate only matching descendants. */
   selector?: string;
+  /** Minimum loading time, in milliseconds, before an effect plays. Default `0`. */
   minIdle?: number;
+  /** Loads shorter than this many milliseconds skip the effect and fade in; `0` always plays it. Default `500`. */
+  fadeUnder?: number;
   /** `'auto'` follows `prefers-reduced-motion`. */
   reducedMotion?: boolean | 'auto';
   seed?: number;
@@ -61,6 +64,7 @@ function RevealImpl<O>(props: RevealProps<O>, ref: React.ForwardedRef<RevealHand
     lazy,
     selector,
     minIdle,
+    fadeUnder,
     reducedMotion,
     seed,
     skeleton,
@@ -75,7 +79,7 @@ function RevealImpl<O>(props: RevealProps<O>, ref: React.ForwardedRef<RevealHand
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
   const element = React.useRef<HTMLElement | null>(null);
   const reveal = useReveal<O>(
-    { effect, options, loading, revealOnMount: mountReveal, origin, duration, speed, lazy, selector, minIdle, reducedMotion, seed, onRevealComplete },
+    { effect, options, loading, revealOnMount: mountReveal, origin, duration, speed, lazy, selector, minIdle, fadeUnder, reducedMotion, seed, onRevealComplete },
     canvasRef,
   );
   const attach = reveal.ref;

@@ -46,8 +46,8 @@ export function useReveal<O>(opts: UseRevealOptions<O>, canvasRef?: React.RefObj
   // Options first: when the effect and `loading` change in one render, the loading
   // state starts once, with the new effect.
   useIsoLayoutEffect(() => {
-    const { effect, options, origin, duration, speed, lazy, selector, minIdle, reducedMotion, seed } = opts;
-    ctrl.current?.update({ effect, options, origin, duration, speed, lazy, selector, minIdle, reducedMotion, seed });
+    const { effect, options, origin, duration, speed, lazy, selector, minIdle, fadeUnder, reducedMotion, seed } = opts;
+    ctrl.current?.update({ effect, options, origin, duration, speed, lazy, selector, minIdle, fadeUnder, reducedMotion, seed });
   });
 
   useIsoLayoutEffect(() => {

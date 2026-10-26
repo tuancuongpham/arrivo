@@ -80,7 +80,7 @@ function drawBars(stage: Stage, cols: Column[], level: (c: Column, i: number) =>
 export const equalizer: Effect<EqualizerOptions> = defineEffect({
   name: 'equalizer',
   show: 'end',
-  duration: 1300,
+  duration: 750,
   css: '.arrivo[data-arrivo-effect="equalizer"] .arrivo-sk-line,.arrivo[data-arrivo-effect="equalizer"] .arrivo-sk-block{background:repeating-linear-gradient(90deg,color-mix(in srgb,currentColor 18%,transparent) 0 3px,transparent 3px 4px)}',
 
   idle(stage, options) {

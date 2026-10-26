@@ -12,7 +12,10 @@ export interface Controls {
 }
 
 const DEFAULTS: Controls = { hold: false, speed: E2E ? 2 : 1, origin: 'center', replayAll: 0 };
-const LATENCY_MS = E2E ? 200 : 1400;
+/** `?latency=ms` overrides the fake request time; `?latency=100` shows a fast load fading in. */
+const LATENCY_PARAM = typeof location === 'undefined' ? NaN : Number(new URLSearchParams(location.search).get('latency') ?? NaN);
+// The e2e run stays above the 500 ms fast-load threshold, so the effects still play.
+const LATENCY_MS = LATENCY_PARAM >= 0 ? LATENCY_PARAM : E2E ? 600 : 1400;
 
 interface ControlsApi {
   controls: Controls;

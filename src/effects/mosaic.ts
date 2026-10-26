@@ -32,7 +32,7 @@ function tiles(stage: Stage, size: number): Rect[] {
 export const mosaic: Effect<MosaicOptions> = defineEffect({
   name: 'mosaic',
   show: 'end',
-  duration: 1400,
+  duration: 800,
   css: '.arrivo[data-arrivo-effect="mosaic"] .arrivo-sk-line,.arrivo[data-arrivo-effect="mosaic"] .arrivo-sk-block{border-radius:0;background:repeating-linear-gradient(90deg,color-mix(in srgb,currentColor 12%,transparent) 0 1.4em,color-mix(in srgb,currentColor 7%,transparent) 1.4em 2.8em)}',
 
   idle(stage, options) {

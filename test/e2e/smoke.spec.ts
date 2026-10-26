@@ -168,10 +168,44 @@ test('nothing scrolls sideways on a phone', async ({ page }) => {
 test('a card waits until it is scrolled into view before it loads', async ({ page }) => {
   await page.goto('/?e2e');
   const card = page.getByTestId('card-snow');
-  // Five times the e2e latency: an eager card would have loaded by now.
-  await page.waitForTimeout(1000);
+  // Well past the e2e latency: an eager card would have loaded by now.
+  await page.waitForTimeout(1500);
   await expect(card).toHaveAttribute('data-loading', 'true');
   await card.scrollIntoViewIfNeeded();
   await expect(card).toHaveAttribute('data-loading', 'false', { timeout: 15_000 });
   await expect(page.getByTestId('reveal-snow')).not.toHaveAttribute('aria-busy', 'true', { timeout: 15_000 });
+});
+
+/** How long one replay keeps the card busy, measured in the page from aria-busy on to off. */
+async function replayBusyMs(page: Page, id: string): Promise<number> {
+  const card = page.getByTestId(`card-${id}`);
+  const reveal = page.getByTestId(`reveal-${id}`);
+  await card.scrollIntoViewIfNeeded();
+  await expect(reveal).not.toHaveAttribute('aria-busy', 'true', { timeout: 15_000 });
+  await reveal.evaluate((el) => {
+    const w = window as unknown as { __busy: { on?: number; off?: number } };
+    w.__busy = {};
+    new MutationObserver(() => {
+      if (el.getAttribute('aria-busy') === 'true') w.__busy.on ??= performance.now();
+      else if (w.__busy.on !== undefined) w.__busy.off ??= performance.now();
+    }).observe(el, { attributes: true, attributeFilter: ['aria-busy'] });
+  });
+  await card.getByRole('button', { name: /^Replay/ }).click();
+  await expect.poll(() => page.evaluate(() => (window as unknown as { __busy: { off?: number } }).__busy.off), { timeout: 15_000 }).toBeDefined();
+  return page.evaluate(() => {
+    const b = (window as unknown as { __busy: { on: number; off: number } }).__busy;
+    return b.off - b.on;
+  });
+}
+
+test('a fast load fades in instead of playing the effect', async ({ page }) => {
+  const errors = collectErrors(page);
+  await page.goto('/?e2e');
+  const slow = await replayBusyMs(page, 'halftone');
+  await page.goto('/?e2e&latency=60');
+  const fast = await replayBusyMs(page, 'halftone');
+  // A 600 ms request plus the effect's reveal, against a 60 ms request plus a 150 ms fade.
+  expect(slow).toBeGreaterThan(900);
+  expect(fast).toBeLessThan(450);
+  expect(errors).toEqual([]);
 });

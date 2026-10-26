@@ -87,8 +87,7 @@ function drawCaps(stage: Stage, caps: Cap[], c: ReturnType<typeof colours>, scal
 export const snow: Effect<SnowOptions, SnowState> = defineEffect({
   name: 'snow',
   show: 'start',
-  duration: 1700,
-  minIdle: 800,
+  duration: 950,
   css: '.arrivo[data-arrivo-effect="snow"] .arrivo-sk-line,.arrivo[data-arrivo-effect="snow"] .arrivo-sk-block{background:color-mix(in srgb,#B5D4F4 45%,transparent);border-top:2px solid #EEF4FB}',
 
   idle(stage, options) {

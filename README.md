@@ -15,6 +15,7 @@ While `loading` is true, the content is hidden and an effect plays exactly where
 - **Content stays in the DOM.** Nothing is cloned or moved. Effects draw on one canvas overlay (`pointer-events: none`, `aria-hidden`), then hand back to the real elements.
 - **No layout shift.** Content is hidden with `visibility`, so it keeps its space throughout.
 - **Accessible.** Screen readers get the real text, the wrapper carries `aria-busy` while loading, and `prefers-reduced-motion` turns every reveal into a 150 ms fade.
+- **Never in the way of a fast response.** A load that finishes in under half a second skips the effect and fades in, reveals take 0.7 to 1 s, and there is no minimum loading time.
 - **Cheap.** One shared `requestAnimationFrame` loop for the whole page. Off-screen reveals pause, a watchdog falls back to fades on struggling devices, and a reveal that gets no frames at all (an occluded window, a frozen webview) shows its content after 2 s instead of staying hidden.
 - **Zero runtime dependencies.** React ≥ 17 is a peer dependency, and a framework-agnostic core is available.
 
@@ -100,14 +101,15 @@ Effects are plain objects imported from `@brottin/arrivo/effects`, so bundlers o
 | `options` | — | Effect-specific options |
 | `loading` | `false` | Hide the content and play the loading state; flipping to `false` reveals |
 | `skeleton` | — | Rendered instead of `children` while `loading` |
-| `revealOnMount` | `true` | Reveal once on mount when not loading |
+| `revealOnMount` | `true` | Reveal once on mount when not loading. Content that is already there fades in unless `fadeUnder` is `0` |
 | `revealOnHydrate` | `false` | Also animate server-rendered content during hydration |
 | `origin` | `'center'` | `'center'`, `'top-left'`, `'pointer'` or `{ x, y }` in viewport pixels |
-| `duration` | `'fast'` | Milliseconds, `'fast'` or `'cinematic'` (1.8× slower) |
+| `duration` | `'fast'` | Milliseconds, `'fast'` (the effect's default, 0.7 to 1 s) or `'cinematic'` (1.8× slower) |
 | `speed` | `1` | Playback multiplier for loading and reveal |
 | `lazy` | `true` | Wait until on screen before revealing |
 | `selector` | — | Animate only matching descendants |
-| `minIdle` | per effect | Minimum loading time before a reveal |
+| `minIdle` | `0` | Minimum loading time, in milliseconds, before an effect plays |
+| `fadeUnder` | `500` | Loads shorter than this many milliseconds skip the effect and fade in; `0` always plays it |
 | `reducedMotion` | `'auto'` | `true`/`false` to override `prefers-reduced-motion` |
 | `seed` | `1` | Seed for every random choice the effect makes |
 | `onRevealComplete` | — | Called when a reveal finishes |
@@ -214,8 +216,8 @@ export const wipe = defineEffect<{ angle: number }>({
 `npm run bench` runs every effect at 320×180, 640×360 and 1280×720 in headless Edge and times each frame on the CPU. At 640×360, every effect averages under 3 ms per frame, both loading and revealing. The bench fails above 4 ms. Large areas are handled by adaptive caps: coarser threshold cells, fewer halftone dots, at most 1800 particles, and device pixel ratio capped at 2 and lowered for canvases over 1.5 MP.
 
 Sizes, minified and gzipped:
-- The core is 8.5 KB.
-- The React entry is 9.5 KB, core included.
+- The core is 8.6 KB.
+- The React entry is 9.6 KB, core included.
 - Each effect adds 0.7 KB (redact) to 3.4 KB (fuse).
 
 ## Development
@@ -231,7 +233,7 @@ npm run build:playground   # static demo site in playground/dist (relative base,
 ```
 
 The playground has three pages:
-- `/`: the demo site. A hero that tours every effect, a gallery of all thirteen on realistic cards, the eight threshold maps, a sandbox and install notes. Photographs come from Unsplash through [Lorem Picsum](https://picsum.photos), which sends CORS headers so effects can read the pixels. Add `?e2e` for fixed data, local canvas art instead of photos and short latencies, which is what the end-to-end tests use.
+- `/`: the demo site. A hero that tours every effect, a gallery of all thirteen on realistic cards, the eight threshold maps, a sandbox and install notes. Photographs come from Unsplash through [Lorem Picsum](https://picsum.photos), which sends CORS headers so effects can read the pixels. Add `?latency=100` to make the fake requests fast and watch them fade in instead, or `?e2e` for fixed data and local canvas art instead of photos, which is what the end-to-end tests use.
 - `/frames.html`: a filmstrip of every effect at fixed moments, useful for visual review. Add `?dark` for a dark surface or `?only=crt` for a single effect.
 - `/bench.html`: the frame-time table.
 
